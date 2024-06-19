@@ -32,6 +32,14 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      # local.propertiesの設定
+      - name: Set up local.properties
+        env:
+          OWNER_MAIL_ADDRESS: ${{ secrets.OWNER_MAIL_ADDRESS }}
+          OWNER_PHONE_NUMBER: ${{ secrets.OWNER_PHONE_NUMBER }}
+        run: |
+          sed "s|\${OWNER_MAIL_ADDRESS}|$OWNER_MAIL_ADDRESS|g; s|\${OWNER_PHONE_NUMBER}|$OWNER_PHONE_NUMBER|g;" local.defaults.properties > local.properties
+
       # Gradleのキャッシュ復元
       - uses: actions/cache@v2
         with:
