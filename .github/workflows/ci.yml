@@ -109,6 +109,13 @@ jobs:
       # チェックアウト
       - uses: actions/checkout@v2
 
+      # JDKのセットアップ
+      - name: set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
       # 静的解析
       - name: Run Inspection
         run: ./gradlew lint
